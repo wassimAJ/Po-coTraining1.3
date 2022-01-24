@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect} from "react";
 import {
   Text,
   View,
@@ -8,9 +8,17 @@ import {
 } from "react-native";
 import { Context } from "../context/BlogContext";
 import { Feather } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 
 const IndexScreen = ({ navigation }) => {
-  const { state, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+  const isFocused = useIsFocused()
+
+  useEffect(() => {
+    getBlogPosts()
+  }, [isFocused]);
+  
+
   return (
     <View>
       <Text>Index Screen</Text>
